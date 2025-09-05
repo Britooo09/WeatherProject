@@ -39,7 +39,7 @@ int main()
     int units;
     int lang;
 
-    ifstream cfgFile("config.json");
+    ifstream cfgFile("testFiles/config.json");
     if (cfgFile.is_open())
     {
         json cfgRead = json::parse(cfgFile);
@@ -108,7 +108,7 @@ int main()
             res = curl_easy_getinfo(curl, CURLINFO_CONTENT_TYPE, &ct);
 
             // Instrucciones que crean y escriben el archivo .json con la información obtenida de la API
-            ofstream wWrite("weather.json");
+            ofstream wWrite("testFiles/weather.json");
             wWrite << api_response;
             wWrite.close();
 
@@ -120,7 +120,7 @@ int main()
             }
 
             system("cls");
-            ifstream wRead("weather.json"); // Abre el archivo
+            ifstream wRead("testFiles/weather.json"); // Abre el archivo
             if (wRead.is_open())
             {
                 json j = json::parse(wRead); // Analiza el archivo

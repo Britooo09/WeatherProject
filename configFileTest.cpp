@@ -11,7 +11,7 @@ int main()
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 
-    ifstream f("config.json");
+    ifstream f("testFiles/config.json");
     json j;
 
     if (f.is_open())
@@ -27,11 +27,11 @@ int main()
         cout<<"el archivo .json no debería haber cambiado todavía.\n\n";
         f.close();
 
-        ofstream f2("config.json");
+        ofstream f2("testFiles/config.json");
         f2 << j;
         f2.close();
 
-        fstream f3("config.json");
+        fstream f3("testFiles/config.json");
         json j2 = json::parse(f3);
 
         cout<<"el archivo .json ahora sí debería haber cambiado. Este es su contenido: "<<j2<<"\n\n";
@@ -43,7 +43,7 @@ int main()
     else
     {
         cout << "No se pudo abrir el archivo. Significa que es la primera vez que abres el programa.\n\n";
-        ofstream f("config.json");
+        ofstream f("testFiles/config.json");
         j["opt"] = 1;
         f << j;
     }

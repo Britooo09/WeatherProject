@@ -11,13 +11,17 @@ using json = nlohmann::json;
 // Compile: g++ main.cpp -o main.exe -lcurl
 
 // Global variables declaration
+int mode = 0; // 0. City Name; 1. City Name + Country Code; 2. ID
+int consultType = 0; // 0. Weather; 1. Forecast
+bool isMetric = true;
 string url;
-string fileName = "testFile.txt";
+string fileName = "testFiles/testFile.txt";
+bool curlError = false;
 
-// Function declaration
+// Functions declaration
 size_t curlCallback(void *contents, size_t unitsize, size_t qty, void *userp);
 void urlConstruction();
-bool curlStart();
+void curlStart();
 void resultsDisplay();
 
 int main()
@@ -27,21 +31,20 @@ int main()
 
     urlConstruction();
     curlStart();
-    if (!curlStart())
-    {
-        resultsDisplay();
-        system("pause");
-
-        return 0;
-    }
-    else
+    if (curlError)
     {
         system("pause");
         return 1;
     }
+    else
+    {
+        resultsDisplay();
+        system("pause");
+        return 0;
+    }
 }
 
-// Function definition
+// Functions definition
 size_t curlCallback(void *contents, size_t unitsize, size_t qty, void *userp)
 {
     size_t realsize = unitsize * qty;            // realsize stores full processed data size
@@ -55,13 +58,94 @@ size_t curlCallback(void *contents, size_t unitsize, size_t qty, void *userp)
 void urlConstruction()
 {
     // API-related variables declaration
-    string base_url = "https://www.example.com";
+    string url_base = "https://api.openweathermap.org/data/2.5/";
+    string url_appid = "&appid=6a23773c0153f0beac3cf62e6df26495";
+    string url_mode;
+    string url_consultType;
+    string url_units;
 
-    // url should be constructed depending on several parameters. Set url = base_url ase a placeholder
-    url = base_url;
+    // TO-DO: Append user-typed input. For City Name + Country Code, start append with ","
+    // For testing purposes, appending will happen inside the switch block. Pending definitive structure
+    // Recommendation: check for numbers-only input for ID
+    // Going to set to "maturin", "maturin,ve" and "3778045" as placeholders
+
+    switch (mode)
+    {
+    case 0:
+        // City Name
+        url_mode = "?q=";
+        url_mode.append("maturin");
+        break;
+
+    case 1:
+        // City Name + Country Code
+        url_mode = "?q=";
+        url_mode.append("maturin,ve");
+        break;
+
+    case 2:
+        // ID
+        url_mode = "?id=";
+        url_mode.append("3778045");
+        break;
+    
+    default:
+        // Return error
+        break;
+    }
+
+    switch (consultType)
+    {
+    case 0:
+        // Weather
+        url_consultType = "weather";
+        break;
+
+    case 1:
+        // Forecast
+        url_consultType = "forecast";
+        break;
+    
+    default:
+        // Return error
+        break;
+    }
+
+    switch (isMetric)
+    {
+    case true:
+        // Metric
+        url_units = "&units=metric";
+        break;
+
+    case false:
+        // Imperial
+        url_units = "&units=imperial";
+        break;
+    
+    default:
+        // Return error
+        break;
+    }
+
+    /*Se necesita:
+    - Clima actual (weather)
+    - pronóstico para los próximos 5 días, cada 3 horas (forecast)
+    - búsqueda por nombre ([?q={city name}][?q={city name},{country code}])
+    - búsqueda por id (?id={city id})
+    - selector de unidades (&units={[metric][imperial]})
+    - selector de idioma (&lang={language})
+    - establecimiento de la api (&appid={API key})
+    - integración con la api de geocoding
+    - pensar si se van a pedir primero los detalles o el tipo de consulta
+    - pensar si la api de geocoding va aparte
+    */
+
+    // url should be constructed depending on several parameters. Set url = url_base ase a placeholder
+    url = url_base + url_consultType + url_mode + url_units + url_appid;
 }
 
-bool curlStart()
+void curlStart()
 {
     // cURL variables declaration
     CURL *curl;
@@ -92,13 +176,10 @@ bool curlStart()
         {
             cerr << "cURL failed.\n";
             cerr << "Error: " << curl_easy_strerror(res) << "\n\n";
-            return true;
+            curlError = true;
         }
-
-        // Final cURL handle cleanup
-        curl_easy_cleanup(curl);
     }
-    return false;
+    curl_easy_cleanup(curl);
 }
 
 void resultsDisplay()
