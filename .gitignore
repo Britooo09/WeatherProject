@@ -2,11 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,c++,visualstudiocode
 
 ### Project specific ###
-testFiles/
-!.gitignore
-!.gitattributes
-!.github
-!.editorconfig
+testFiles/*
 
 ### C++ ###
 *.d
@@ -43,11 +39,6 @@ testFiles/
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
 
 # Local History for Visual Studio Code
 .history/
@@ -84,5 +75,16 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+### Don't Ignore ###
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+!.gitignore
+!.gitattributes
+!.github
+!.editorconfig
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,c++,visualstudiocode
