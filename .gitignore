@@ -3,6 +3,7 @@
 
 ### Project specific ###
 testFiles/*
+lib/api_keys.hpp
 
 ### C++ ###
 *.d

@@ -1,5 +1,6 @@
 #include "lib/curl/curl.h"
 #include "lib/json.hpp"
+#include "lib/api_keys.hpp"
 #include <iostream>
 #include <fstream>
 #include <windows.h>
@@ -7,7 +8,6 @@
 using namespace std;
 using json = nlohmann::json;
 
-// API key: 6a23773c0153f0beac3cf62e6df26495
 // Compile: g++ weatherTest_lcurl.cpp -o weatherTest_lcurl.exe -lcurl
 
 // Función que procesa cada chunk de datos recibido desde la API
@@ -33,7 +33,7 @@ int main()
 
     // Declaración de variables relacionadas con la API
     string base_url = "http://api.openweathermap.org/data/2.5/forecast?id=524901";
-    string apikey_url = "&appid=6a23773c0153f0beac3cf62e6df26495";
+    string apikey_url = "&appid=" + OPENWEATHERMAP_API_KEY;
     string units_url;
     string lang_url;
     int units;
