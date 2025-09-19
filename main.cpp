@@ -1,5 +1,6 @@
 #include "lib/curl/curl.h"
 #include "lib/json.hpp"
+#include "lib/api_keys.hpp"
 #include <iostream>
 #include <fstream>
 #include <windows.h>
@@ -7,7 +8,6 @@
 using namespace std;
 using json = nlohmann::json;
 
-// API key: 6a23773c0153f0beac3cf62e6df26495
 // Compile: g++ main.cpp -o main.exe -lcurl
 
 // Global variables declaration
@@ -60,7 +60,7 @@ void urlConstruction()
 {
     // API-related variables declaration
     string url_base = "https://api.openweathermap.org/data/2.5/";
-    string url_appid = "&appid=6a23773c0153f0beac3cf62e6df26495";
+    string url_appid = "&appid=" + OPENWEATHERMAP_API_KEY;
     string url_mode;
     string url_consultType;
     string url_units;

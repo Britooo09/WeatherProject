@@ -9,7 +9,6 @@
 using namespace std;
 using json = nlohmann::json;
 
-// API key: 6a23773c0153f0beac3cf62e6df26495
 // Compile: g++ menuSystem.cpp -o menuSystem.exe
 
 // Global variables declaration
