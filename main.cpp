@@ -11,7 +11,8 @@ using json = nlohmann::json;
 // Compile: g++ main.cpp -o main.exe -lcurl
 
 // Global variables declaration
-int mode = 0; // 0. City Name; 1. City Name + Country Code; 2. ID
+int opt;
+int mode = 0;        // 0. City Name; 1. City Name + Country Code; 2. ID
 int consultType = 0; // 0. Weather; 1. Forecast
 bool isMetric = true;
 string url;
@@ -88,7 +89,7 @@ void urlConstruction()
         url_mode = "?id=";
         url_mode.append("3778045");
         break;
-    
+
     default:
         // Return error
         break;
@@ -105,27 +106,19 @@ void urlConstruction()
         // Forecast
         url_consultType = "forecast";
         break;
-    
+
     default:
         // Return error
         break;
     }
 
-    switch (isMetric)
+    if (isMetric)
     {
-    case true:
-        // Metric
         url_units = "&units=metric";
-        break;
-
-    case false:
-        // Imperial
+    }
+    else
+    {
         url_units = "&units=imperial";
-        break;
-    
-    default:
-        // Return error
-        break;
     }
 
     /*Se necesita:

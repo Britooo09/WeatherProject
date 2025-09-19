@@ -12,7 +12,7 @@ Practice project. Console application that allows to check weather information u
 
 **Weather Project** is the second complete project I am about to undertake, and the first intended solely for personal and practice purposes. The idea is to create a console application that, based on the options chosen by the user, displays a series of weather information (current, forecasts, etc.), obtained through a connection to the [OpenWeatherMaps API](https://openweathermap.org/api). The third-party libraries [cURL](https://curl.se/libcurl/) and [nlohmann/json](https://github.com/nlohmann/json) are used.
 
-# 
+---
 
 Proyecto de práctica. Aplicación de consola que permite consultar información sobre el clima utilizando la API de OpenWeatherMaps.
 
