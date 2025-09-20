@@ -1,6 +1,7 @@
 #include "lib/curl/curl.h"
 #include "lib/json.hpp"
 #include "lib/api_keys.hpp"
+#include "lib/initialConfigRead.hpp"
 #include <iostream>
 #include <fstream>
 #include <windows.h>
@@ -14,7 +15,7 @@ using json = nlohmann::json;
 int opt;
 int mode = 0;        // 0. City Name; 1. City Name + Country Code; 2. ID
 int consultType = 0; // 0. Weather; 1. Forecast
-bool isMetric = true;
+// bool isMetric = true;
 string url;
 string fileName = "testFiles/testFile.txt";
 bool curlError = false;

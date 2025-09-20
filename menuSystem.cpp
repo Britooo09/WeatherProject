@@ -1,10 +1,11 @@
 #include "lib/json.hpp"
+#include "lib/initialConfigRead.hpp"
 #include <iostream>
 #include <fstream>
 #include <windows.h>
 
 // Languages
-#include "lang/English.h"
+#include "lang/English.hpp"
 
 using namespace std;
 using json = nlohmann::json;
@@ -13,11 +14,8 @@ using json = nlohmann::json;
 
 // Global variables declaration
 int opt;
-string fileName = "testFiles/testFile.txt";
 
 // Functions declaration
-void resultsDisplay();
-void initialConfigRead();
 void intro();
 void menu();
 void settings();
@@ -35,16 +33,11 @@ int main()
 
 // Functions definition
 
-void initialConfigRead()
-{
-    // Contents of the file “initialConfigRead.cpp” must be implemented here once reviewed
-}
-
 void intro()
 {
     system("cls");
-    cout << "\t\t\t\t\t    Hello!\n";
-    cout << "\t\t\tWelcome to the weather query tool.\n\n";
+    cout << "Hello!\n";
+    cout << "Welcome to the weather query tool.\n\n";
 
     cout << "This application uses the OpenWeatherMap API to obtain a variety of information about the current weather conditions\n";
     cout << "and forecasts around the world. Every part of the program and every query is highly customizable, allowing \n";
@@ -81,11 +74,90 @@ void intro()
 void menu()
 {
     // Main menu
+    cout << "Current language code: " << lang << ".\n\n";
+    cout << "Is Metric the system of units selected?\n";
+    if (isMetric)
+    {
+        cout << "Yes.\n\n";
+    }
+    else
+    {
+        cout << "No.\n\n";
+    }
 }
 
 void settings()
 {
     // Config menu. Current objectives: language and units.
+    system("cls");
+    cout << "Message saying which option to set.\n";
+    cout << "  1- Language\n  2- System of units of measurement\n  0- Back\n\n";
+
+    cin >> opt;
+    switch (opt)
+    {
+    case 1:
+        // Language setting
+        system("cls");
+        // TODO: Open config.json as read, to show current setting
+        cout << "Message saying which language to set.\n";
+        cout << "  1- English\n  2- Spanish\n  0- Back\n\n";
+
+        // TODO: Open config.json as write, to save the new setting
+        cin >> opt;
+
+        // In order to add a new language, the following if statement condition must bu adjusted accordingly
+        if (opt <= 0 || opt > 2)
+        {
+            cout << "The option selected is invalid. Please, try again.\n\n";
+            system("pause");
+            // Reload this menu
+        }
+
+        else
+        {
+            // Save the new setting on config.json
+            lang = opt - 1;
+        }
+        break;
+
+    case 2:
+        // Units setting
+        system("cls");
+        // TODO: Open config.json as read, to show current setting
+        cout << "Message saying which system of units of measurement to set.\n";
+        cout << "  1- Metric\n  2- Imperial\n  0- Back\n\n";
+
+        // TODO: Open config.json as write, to save the new setting
+        cin >> opt;
+
+        switch (opt)
+        {
+        case 1:
+            // Set "isMetric": true on config.json
+            break;
+
+        case 2:
+            // Set "isMetric": false on config.json
+            break;
+
+        default:
+        cout << "The option selected is invalid. Please, try again.\n\n";
+        system("pause");
+        // Reload this menu
+        break;
+        }
+
+    case 0:
+        // Back. Reload previous menu
+        break;
+
+    default:
+        cout << "The option selected is invalid. Please, try again.\n\n";
+        system("pause");
+        // Reload this menu
+        break;
+    }
 }
 
 /*

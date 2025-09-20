@@ -1,26 +1,21 @@
-#include "lib/json.hpp"
+#ifndef INITIALCONFIGREAD_H
+#define INITIALCONFIGREAD_H
+
+#include "json.hpp"
 #include <iostream>
 #include <fstream>
-#include <windows.h>
-
-using namespace std;
-using json = nlohmann::json;
 
 int lang;
 bool isMetric;
-
 void initialConfigRead()
 {
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
-
-    ifstream config("config.json");
-    json j;
+    std::ifstream config("config.json");
+    nlohmann::json j;
 
     if (config.is_open())
     {
         // If a configuration file is found, here the program loads the settings in that file
-        j = json::parse(config);
+        j = nlohmann::json::parse(config);
         lang = j["lang"];
         isMetric = j["isMetric"];
 
@@ -34,7 +29,7 @@ void initialConfigRead()
         // Language = English ("lang": 0)
         // Units = Metric ("isMetric": true)
 
-        ofstream config("testFiles/config.json");
+        std::ofstream config("config.json");
         if (config.is_open())
         {
             j["lang"] = 0;
@@ -49,10 +44,11 @@ void initialConfigRead()
         else
         {
             system("cls");
-            cerr << "Couldn't save the configuration file!\n";
-            cerr << "Settings will not be applied and the default values will be used instead.\n\n";
+            std::cerr << "Couldn't save the configuration file!\n";
+            std::cerr << "Settings will not be applied and the default values will be used instead.\n\n";
+            system("pause");
         }
     }
-
-    system("pause");
 }
+
+#endif

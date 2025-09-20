@@ -4,6 +4,7 @@
 ### Project specific ###
 testFiles/*
 lib/api_keys.hpp
+config.json
 
 ### C++ ###
 *.d

@@ -1,7 +1,9 @@
 #ifndef ENGLISH_H
 #define ENGLISH_H
 
-class English {
+class English
+{
+public:
     void intro();
     void menu();
     void settings();
