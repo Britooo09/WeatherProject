@@ -113,14 +113,7 @@ void urlConstruction()
         break;
     }
 
-    if (isMetric)
-    {
-        url_units = "&units=metric";
-    }
-    else
-    {
-        url_units = "&units=imperial";
-    }
+    isMetric ? url_units = "&units=metric" : url_units = "&units=imperial";
 
     /*Se necesita:
     - Clima actual (weather)

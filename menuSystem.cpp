@@ -76,14 +76,7 @@ void menu()
     // Main menu
     cout << "Current language code: " << lang << ".\n\n";
     cout << "Is Metric the system of units selected?\n";
-    if (isMetric)
-    {
-        cout << "Yes.\n\n";
-    }
-    else
-    {
-        cout << "No.\n\n";
-    }
+    isMetric ? cout << "Yes.\n\n" : cout << "No.\n\n";
 }
 
 void settings()
