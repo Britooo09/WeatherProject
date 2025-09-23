@@ -18,6 +18,7 @@ int opt;
 // Functions declaration
 void intro();
 void menu();
+void configError();
 void settings();
 
 int main()
@@ -39,11 +40,11 @@ void intro()
     cout << "Hello!\n";
     cout << "Welcome to the weather query tool.\n\n";
 
-    cout << "This application uses the OpenWeatherMap API to obtain a variety of information about the current weather conditions\n";
-    cout << "and forecasts around the world. Every part of the program and every query is highly customizable, allowing \n";
-    cout << "the information to be tailored to your needs.\n\n";
+    cout << "This application uses the OpenWeatherMap API to obtain a variety of information about the current weather\n";
+    cout << "conditions and forecasts around the world. Every part of the program and every query is highly customizable,\n";
+    cout << "allowing the information to be tailored to your needs.\n\n";
 
-    cout << "To begin, enter the number corresponding to the option you would like to run.\n";
+    cout << "To begin, enter the number corresponding to the option you would like to run:\n";
     cout << "  1- Start program\n  9- Settings\n  0- Exit\n\n";
 
     cin >> opt;
@@ -79,93 +80,202 @@ void menu()
     isMetric ? cout << "Yes.\n\n" : cout << "No.\n\n";
 }
 
+void configError()
+{
+    system("cls");
+    cerr << "Couldn't save the configuration file!\n";
+    cerr << "Settings will not be applied and the default values will be used instead.\n\n";
+    system("pause");
+}
+
 void settings()
 {
-    // Config menu. Current objectives: language and units.
+    // Config menu
+    string currentText;
+    json j;
+
     system("cls");
-    cout << "Message saying which option to set.\n";
+    cout << "*SETTINGS*\n\n";
+    cout << "Select the option you would like to change:\n";
     cout << "  1- Language\n  2- System of units of measurement\n  0- Back\n\n";
 
     cin >> opt;
     switch (opt)
     {
     case 1:
+    {
         // Language setting
         system("cls");
-        // TODO: Open config.json as read, to show current setting
-        cout << "Message saying which language to set.\n";
+        ifstream config("config.json");
+
+        // Read the file to show the current settings
+        if (config.is_open())
+        {
+            int currentSetting;
+            j = json::parse(config);
+            currentSetting = j["lang"];
+            switch (currentSetting)
+            {
+            case 0:
+                currentText = "English";
+                break;
+
+            case 1:
+                currentText = "Spanish";
+                break;
+
+            default:
+                currentText = "Invalid";
+                break;
+            }
+            config.close();
+        }
+
+        cout << "*SETTINGS*\n";
+        cout << "Language\n\n";
+        cout << "This option allows to set the language of the program.\n";
+        cout << "Current setting: " << currentText << "\n";
         cout << "  1- English\n  2- Spanish\n  0- Back\n\n";
 
-        // TODO: Open config.json as write, to save the new setting
-        cin >> opt;
-
-        // In order to add a new language, the following if statement condition must bu adjusted accordingly
-        if (opt <= 0 || opt > 2)
+        // In order to add a new language, the following do and if blocks conditions must be adjusted accordingly
+        do
         {
-            cout << "The option selected is invalid. Please, try again.\n\n";
-            system("pause");
-            // Reload this menu
-        }
+            cin >> opt;
+            if (opt < 0 || opt > 2)
+            {
+                // If the option selected is not on the menu
+                cerr << "\nThe option selected is invalid. Please, try again.\n\n";
+            }
 
-        else
-        {
-            // Save the new setting on config.json
-            lang = opt - 1;
-        }
+            else if (opt == 0)
+            {
+                // Get back to previous menu
+                settings();
+            }
+
+            else
+            {
+                // Set "lang" on config.json
+                ofstream config("config.json");
+                if (config.is_open())
+                {
+                    j["lang"] = opt - 1;
+                    lang = opt - 1;
+                    config << j;
+                    config.close();
+
+                    cout << "\nSettings changed succesfully!\n\n";
+                    system("pause");
+                    settings();
+                }
+
+                else
+                {
+                    configError();
+                    settings();
+                }
+            }
+
+        } while (opt < 0 || opt > 2);
         break;
+    }
 
     case 2:
+    {
         // Units setting
         system("cls");
-        // TODO: Open config.json as read, to show current setting
-        cout << "Message saying which system of units of measurement to set.\n";
-        cout << "  1- Metric\n  2- Imperial\n  0- Back\n\n";
+        ifstream config("config.json");
 
-        // TODO: Open config.json as write, to save the new setting
-        cin >> opt;
-
-        switch (opt)
+        // Read the file to show the current settings
+        if (config.is_open())
         {
-        case 1:
-            // Set "isMetric": true on config.json
-            break;
-
-        case 2:
-            // Set "isMetric": false on config.json
-            break;
-
-        default:
-        cout << "The option selected is invalid. Please, try again.\n\n";
-        system("pause");
-        // Reload this menu
-        break;
+            bool currentSetting;
+            j = json::parse(config);
+            currentSetting = j["isMetric"];
+            currentSetting ? currentText = "Metric" : currentText = "Imperial";
+            config.close();
         }
 
+        cout << "*SETTINGS*\n";
+        cout << "System of units of measurement\n\n";
+        cout << "This option allows to set the system of units used to display the results.\n";
+        cout << "Current setting: " << currentText << "\n";
+        cout << "  1- Metric\n  2- Imperial\n  0- Back\n\n";
+
+        do
+        {
+            cin >> opt;
+            switch (opt)
+            {
+            case 1:
+            {
+                // Set "isMetric": true on config.json
+                ofstream config("config.json");
+                if (config.is_open())
+                {
+                    j["isMetric"] = true;
+                    isMetric = true;
+                    config << j;
+                    config.close();
+
+                    cout << "\nSettings changed succesfully!\n\n";
+                    system("pause");
+                    settings();
+                }
+
+                else
+                {
+                    configError();
+                    settings();
+                }
+                break;
+            }
+            case 2:
+            {
+                // Set "isMetric": false on config.json
+                ofstream config("config.json");
+                if (config.is_open())
+                {
+                    j["isMetric"] = false;
+                    isMetric = false;
+                    config << j;
+                    config.close();
+
+                    cout << "\nSettings changed succesfully!\n\n";
+                    system("pause");
+                    settings();
+                }
+
+                else
+                {
+                    configError();
+                    settings();
+                }
+                break;
+            }
+
+            case 0:
+                // Get back to previous menu
+                settings();
+                break;
+
+            default:
+                // If the option selected is not on the menu
+                cerr << "\nThe option selected is invalid. Please, try again.\n\n";
+                break;
+            }
+        } while (opt < 0 || opt > 2);
+        break;
+    }
+
     case 0:
-        // Back. Reload previous menu
+        intro();
         break;
 
     default:
-        cout << "The option selected is invalid. Please, try again.\n\n";
+        cerr << "The option selected is invalid. Please, try again.\n\n";
         system("pause");
-        // Reload this menu
+        settings();
         break;
     }
 }
-
-/*
-SPANISH TEXT:
-intro():
-
-cout << "\t\t\t\t\t    ¡Hola!\n";
-cout << "\t\t\tBienvenido a la utilidad de consulta del clima.\n\n";
-
-cout << "Esta aplicación usa la API de OpenWeatherMap para obtener distinta información sobre el clima actual\n";
-cout << "y los pronósticos alrededor del mundo. Cada parte del programa y cada consulta son altamente personalizables,\n";
-cout << "con lo que se permite que la información se adapte a ti.\n\n";
-
-cout << "Para comenzar, escribe el número que corresponda a la opción que deseas ejecutar.\n";
-cout << "  1- Iniciar programa\n  9- Configuración\n  0- Salir\n\n";
-
-La opción seleccionada no es válida. Por favor, inténtalo de nuevo.\n\n
-*/
