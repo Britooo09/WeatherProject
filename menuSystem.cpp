@@ -1,38 +1,16 @@
-#include "lib/json.hpp"
+#include "lib/menuSystem.hpp"
 #include "lib/initialConfigRead.hpp"
+#include "lib/json.hpp"
 #include <iostream>
 #include <fstream>
 #include <windows.h>
 
-// Languages
-#include "lang/English.hpp"
-
-using namespace std;
-using json = nlohmann::json;
-
-// Compile: g++ menuSystem.cpp -o menuSystem.exe
-
-// Global variables declaration
-int opt;
-
-// Functions declaration
-void intro();
-void menu();
-void configError();
-void settings();
-
-int main()
-{
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
-
-    initialConfigRead();
-    intro();
-    system("pause");
-    return 0;
-}
-
-// Functions definition
+using std::cerr;
+using std::cin;
+using std::cout;
+using std::ifstream;
+using std::ofstream;
+using std::string;
 
 void intro()
 {
@@ -52,7 +30,7 @@ void intro()
     {
     case 1:
         // Start program
-        menu();
+        // menu();
         break;
 
     case 9:
@@ -94,7 +72,7 @@ void settings()
 {
     // Config menu
     string currentText;
-    json j;
+    nlohmann::json j;
 
     system("cls");
     cout << "*SETTINGS*\n\n";
@@ -114,7 +92,7 @@ void settings()
         if (config.is_open())
         {
             int currentSetting;
-            j = json::parse(config);
+            j = nlohmann::json::parse(config);
             currentSetting = j["lang"];
             switch (currentSetting)
             {
@@ -131,6 +109,10 @@ void settings()
                 break;
             }
             config.close();
+        }
+        else
+        {
+            currentText = "Error reading the config file";
         }
 
         cout << "*SETTINGS*\n";
@@ -192,10 +174,14 @@ void settings()
         if (config.is_open())
         {
             bool currentSetting;
-            j = json::parse(config);
+            j = nlohmann::json::parse(config);
             currentSetting = j["isMetric"];
             currentSetting ? currentText = "Metric" : currentText = "Imperial";
             config.close();
+        }
+        else
+        {
+            currentText = "Error reading the config file";
         }
 
         cout << "*SETTINGS*\n";
@@ -280,10 +266,14 @@ void settings()
         if (config.is_open())
         {
             bool currentSetting;
-            j = json::parse(config);
+            j = nlohmann::json::parse(config);
             currentSetting = j["isWeather"];
             currentSetting ? currentText = "Weather" : currentText = "Forecast";
             config.close();
+        }
+        else
+        {
+            currentText = "Error reading the config file";
         }
 
         cout << "*SETTINGS*\n";

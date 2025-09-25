@@ -3,6 +3,7 @@
 
 ### Project specific ###
 testFiles/*
+build/*
 lib/api_keys.hpp
 config.json
 
