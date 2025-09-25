@@ -7,6 +7,7 @@
 
 int lang;
 bool isMetric;
+bool isWeather;
 void initialConfigRead()
 {
     std::ifstream config("config.json");
@@ -18,6 +19,7 @@ void initialConfigRead()
         j = nlohmann::json::parse(config);
         lang = j["lang"];
         isMetric = j["isMetric"];
+        isWeather = j["isWeather"];
 
         config.close();
     }
@@ -28,14 +30,17 @@ void initialConfigRead()
         // Currently, the default settings include:
         // Language = English ("lang": 0)
         // Units = Metric ("isMetric": true)
+        // Mode = Weather ("isWeather": true)
 
         std::ofstream config("config.json");
         if (config.is_open())
         {
             j["lang"] = 0;
             j["isMetric"] = true;
+            j["isWeather"] = true;
             lang = 0;
             isMetric = true;
+            isWeather = true;
 
             config << j;
             config.close();

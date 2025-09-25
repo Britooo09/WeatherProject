@@ -78,6 +78,8 @@ void menu()
     cout << "Current language code: " << lang << ".\n\n";
     cout << "Is Metric the system of units selected?\n";
     isMetric ? cout << "Yes.\n\n" : cout << "No.\n\n";
+    cout << "Is Weather the query mode selected?\n";
+    isWeather ? cout << "Yes.\n\n" : cout << "No.\n\n";
 }
 
 void configError()
@@ -97,7 +99,7 @@ void settings()
     system("cls");
     cout << "*SETTINGS*\n\n";
     cout << "Select the option you would like to change:\n";
-    cout << "  1- Language\n  2- System of units of measurement\n  0- Back\n\n";
+    cout << "  1- Language\n  2- System of units of measurement\n  3- Default query mode\n  0- Back\n\n";
 
     cin >> opt;
     switch (opt)
@@ -133,7 +135,7 @@ void settings()
 
         cout << "*SETTINGS*\n";
         cout << "Language\n\n";
-        cout << "This option allows to set the language of the program.\n";
+        cout << "This option allows to set the language of the program. This also affects the results.\n";
         cout << "Current setting: " << currentText << "\n";
         cout << "  1- English\n  2- Spanish\n  0- Back\n\n";
 
@@ -238,6 +240,96 @@ void settings()
                 {
                     j["isMetric"] = false;
                     isMetric = false;
+                    config << j;
+                    config.close();
+
+                    cout << "\nSettings changed succesfully!\n\n";
+                    system("pause");
+                    settings();
+                }
+
+                else
+                {
+                    configError();
+                    settings();
+                }
+                break;
+            }
+
+            case 0:
+                // Get back to previous menu
+                settings();
+                break;
+
+            default:
+                // If the option selected is not on the menu
+                cerr << "\nThe option selected is invalid. Please, try again.\n\n";
+                break;
+            }
+        } while (opt < 0 || opt > 2);
+        break;
+    }
+
+    case 3:
+    {
+        // Mode setting
+        system("cls");
+        ifstream config("config.json");
+
+        // Read the file to show the current settings
+        if (config.is_open())
+        {
+            bool currentSetting;
+            j = json::parse(config);
+            currentSetting = j["isWeather"];
+            currentSetting ? currentText = "Weather" : currentText = "Forecast";
+            config.close();
+        }
+
+        cout << "*SETTINGS*\n";
+        cout << "Default query mode\n\n";
+        cout << "This option allows to change what results are displayed by default.\n";
+        cout << "\"Weather\" represents the current weather conditions for the selected location.\n";
+        cout << "\"Forecast\" is the weather forecast for the next 5 days for the selected location.\n";
+        cout << "Current setting: " << currentText << "\n";
+        cout << "  1- Weather\n  2- Forecast\n  0- Back\n\n";
+
+        do
+        {
+            cin >> opt;
+            switch (opt)
+            {
+            case 1:
+            {
+                // Set "isWeather": true on config.json
+                ofstream config("config.json");
+                if (config.is_open())
+                {
+                    j["isWeather"] = true;
+                    isWeather = true;
+                    config << j;
+                    config.close();
+
+                    cout << "\nSettings changed succesfully!\n\n";
+                    system("pause");
+                    settings();
+                }
+
+                else
+                {
+                    configError();
+                    settings();
+                }
+                break;
+            }
+            case 2:
+            {
+                // Set "isWeather": false on config.json
+                ofstream config("config.json");
+                if (config.is_open())
+                {
+                    j["isWeather"] = false;
+                    isWeather = false;
                     config << j;
                     config.close();
 
