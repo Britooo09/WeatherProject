@@ -7,7 +7,7 @@ set(WEATHER_SOURCES
     curlFunctions.cpp
     initialConfigRead.cpp
     menuSystem.cpp
-)
+    globals.cpp)
 
 # =================================================================
 # PROJECT COMPILING
