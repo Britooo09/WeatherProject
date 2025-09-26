@@ -21,7 +21,5 @@ target_include_directories(weatherProject PUBLIC ${PROJECT_SOURCE_DIR}/lib)
 
 # 3. Find and link 3rd-party libraries
 find_package(CURL REQUIRED)
-# find_package(nlohmann_json REQUIRED)
 
-target_link_libraries(clima_app PRIVATE CURL::CURL)
-# nlohmann_json::nlohmann_json
+target_link_libraries(weatherProject PRIVATE CURL::libcurl)
