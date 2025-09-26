@@ -4,9 +4,9 @@
 class English
 {
 public:
-    void intro();
-    void menu();
-    void settings();
+	void intro();
+	void menu();
+	void settings();
 };
 
 #endif
