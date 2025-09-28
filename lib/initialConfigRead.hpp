@@ -1,6 +1,3 @@
-#ifndef INITIALCONFIGREAD_H
-#define INITIALCONFIGREAD_H
+#pragma once
 
 void initialConfigRead();
-
-#endif

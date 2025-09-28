@@ -1,9 +1,6 @@
-#ifndef MENUSYSTEM_H
-#define MENUSYSTEM_H
+#pragma once
 
 void intro();
 void menu();
 void configError();
 void settings();
-
-#endif

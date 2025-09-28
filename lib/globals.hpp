@@ -1,5 +1,4 @@
-#ifndef GLOBALS_H
-#define GLOBALS_H
+#pragma once
 
 #include <string>
 
@@ -13,5 +12,3 @@ extern bool isMetric;
 extern bool isWeather;
 
 extern int opt;
-
-#endif
