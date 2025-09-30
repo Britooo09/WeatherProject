@@ -1,5 +1,6 @@
 // Custom headers
 #include "lib/menuSystem.hpp"
+#include "lib/apiFunctions.hpp"
 #include "lib/initialConfigRead.hpp"
 #include "lib/globals.hpp"
 
@@ -36,7 +37,7 @@ void intro()
 	{
 	case 1:
 		// Start program
-		// menu();
+		menu();
 		break;
 
 	case 9:
@@ -58,12 +59,62 @@ void intro()
 
 void menu()
 {
-	// Main menu
-	cout << "Current language code: " << lang << ".\n\n";
-	cout << "Is Metric the system of units selected?\n";
-	isMetric ? cout << "Yes.\n\n" : cout << "No.\n\n";
-	cout << "Is Weather the query mode selected?\n";
-	isWeather ? cout << "Yes.\n\n" : cout << "No.\n\n";
+	system("cls");
+	cout << "*MAIN MENU*\n\n";
+	cout << "Select the desired option:\n";
+	cout << "  1- Quick query\n  2- Advanced search\n  3- View data\n  4- Repeat last query\n  0- Back\n\n";
+
+	cin >> opt;
+	switch (opt)
+	{
+	case 1:
+		// Quick query
+		quickQuery();
+		break;
+
+	case 2:
+		// Advanced search
+		system("cls");
+		cout << "*MAIN MENU*\nAdvanced search\n\n";
+		cout << "With this mode, you can perform a search and select a location from a list of results.\n";
+		cout << "Use it specially if you don't get desired results with the quick query mode.\n\n";
+		advancedSearch();
+		break;
+
+	case 3:
+		// View data
+		system("cls");
+		cout << "*MAIN MENU*\nView data\n\n";
+		cout << "This mode allows checking technical details about the selected location, such as:\n";
+		cout << "  - City ID\n";
+		cout << "  - Coordinates (latitude and longitude)\n";
+		cout << "  - Location names in supported languages\n";
+		cout << "  - Timezone\n";
+		cout << "  - Sunrise and sunset time\n";
+		cout << "  - And more!\n\n";
+		viewData();
+		break;
+
+	case 4:
+		// Repeat last query
+		system("cls");
+		cout << "*MAIN MENU*\nRepeat last query\n\n";
+		cout << "This option shows the results of the last successful query made.\n\n";
+		lastQuery();
+		break;
+
+	case 0:
+		// Get back to previous menu
+		intro();
+		break;
+
+	default:
+		// If the option selected is not on the menu
+		cerr << "The option selected is invalid. Please, try again.\n\n";
+		system("pause");
+		menu();
+		break;
+	}
 }
 
 void configError()
@@ -121,10 +172,9 @@ void settings()
 			currentText = "Error reading the config file";
 		}
 
-		cout << "*SETTINGS*\n";
-		cout << "Language\n\n";
+		cout << "*SETTINGS*\nLanguage\n\n";
 		cout << "This option allows to set the language of the program. This also affects the results.\n";
-		cout << "Current setting: " << currentText << "\n";
+		cout << "Current setting: " << currentText << ".\n";
 		cout << "  1- English\n  2- Spanish\n  0- Back\n\n";
 
 		// In order to add a new language, the following do and if blocks conditions must be adjusted accordingly
@@ -190,10 +240,9 @@ void settings()
 			currentText = "Error reading the config file";
 		}
 
-		cout << "*SETTINGS*\n";
-		cout << "System of units of measurement\n\n";
+		cout << "*SETTINGS*\nSystem of units of measurement\n\n";
 		cout << "This option allows to set the system of units used to display the results.\n";
-		cout << "Current setting: " << currentText << "\n";
+		cout << "Current setting: " << currentText << ".\n";
 		cout << "  1- Metric\n  2- Imperial\n  0- Back\n\n";
 
 		do
@@ -282,12 +331,11 @@ void settings()
 			currentText = "Error reading the config file";
 		}
 
-		cout << "*SETTINGS*\n";
-		cout << "Default query mode\n\n";
+		cout << "*SETTINGS*\nDefault query mode\n\n";
 		cout << "This option allows to change what results are displayed by default.\n";
 		cout << "\"Weather\" represents the current weather conditions for the selected location.\n";
 		cout << "\"Forecast\" is the weather forecast for the next 5 days for the selected location.\n";
-		cout << "Current setting: " << currentText << "\n";
+		cout << "Current setting: " << currentText << ".\n";
 		cout << "  1- Weather\n  2- Forecast\n  0- Back\n\n";
 
 		do
@@ -357,10 +405,12 @@ void settings()
 	}
 
 	case 0:
+		// Get back to previous menu
 		intro();
 		break;
 
 	default:
+		// If the option selected is not on the menu
 		cerr << "The option selected is invalid. Please, try again.\n\n";
 		system("pause");
 		settings();

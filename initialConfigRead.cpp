@@ -12,6 +12,7 @@ void initialConfigRead()
 	if (config.is_open())
 	{
 		// If a configuration file is found, here the program loads the settings in that file
+		// If the configuration file is found to be corrupted or incomplete, the program should overwrite it with the default settings
 		j = nlohmann::json::parse(config);
 		lang = j["lang"];
 		isMetric = j["isMetric"];
@@ -28,15 +29,16 @@ void initialConfigRead()
 		// Units = Metric ("isMetric": true)
 		// Mode = Weather ("isWeather": true)
 
+		lang = 0;
+		isMetric = true;
+		isWeather = true;
+
 		std::ofstream config("config.json");
 		if (config.is_open())
 		{
-			j["lang"] = 0;
-			j["isMetric"] = true;
-			j["isWeather"] = true;
-			lang = 0;
-			isMetric = true;
-			isWeather = true;
+			j["lang"] = lang;
+			j["isMetric"] = isMetric;
+			j["isWeather"] = isWeather;
 
 			config << j;
 			config.close();

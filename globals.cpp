@@ -1,11 +1,10 @@
 #include "lib/globals.hpp"
 #include <string>
 
-int mode = 0;        // 0. City Name; 1. City Name + Country Code; 2. ID
-std::string url;
-std::string fileName = "testFiles/testFile.txt";
+std::string fileName = "weatherData.json";
 bool curlError = false;
 
+std::string query;
 int lang;
 bool isMetric;
 bool isWeather;

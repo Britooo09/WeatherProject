@@ -1,4 +1,5 @@
 // Custom headers
+#include "lib/apiFunctions.hpp"
 #include "lib/curlFunctions.hpp"
 #include "lib/initialConfigRead.hpp"
 #include "lib/globals.hpp"
@@ -18,16 +19,15 @@ int main()
 
 	initialConfigRead();
 	intro();
-	urlConstruction();
-	curlStart();
 	if (curlError)
 	{
+		// Behavior if program fails
 		system("pause");
 		return 1;
 	}
 	else
 	{
-		resultsDisplay();
+		// Behavior if program succeeds
 		system("pause");
 		return 0;
 	}
@@ -45,9 +45,7 @@ Se necesita:
 - integración con la api de geocoding
 - pensar si se van a pedir primero los detalles o el tipo de consulta
 - pensar si la api de geocoding va aparte
-*/
 
-/*
 Procedimiento general planeado:
 Lista de opciones:
 - Consulta rápida
@@ -64,7 +62,24 @@ Lista de opciones:
 		- Se pide el nombre de la ubicación que se desea consultar
 		- Se muestra una lista de opciones sencilla con los datos resultantes de la búsqueda
 		- Se despliega toda la información técnica de la ubicación (los resultados de la misma API)
+- Repetir última consulta
 Al ver el clima o el pronóstico de una ubicación, permitir pasar a la otra opción dinámicamente
 Agregar weather/forecast a la lista de opciones
 GUARDAR LA ID COMO "ÚLTIMA CONSULTA", LPM SOY UN GENIO
+
+void resultsDisplay()
+{
+	string read;
+
+	ifstream fileRead(fileName);
+	if (fileRead.is_open())
+	{
+		while (fileRead >> read)
+		{
+			getline(fileRead, read);
+			cout << read << "\n\n";
+		}
+		fileRead.close();
+	}
+}
 */
