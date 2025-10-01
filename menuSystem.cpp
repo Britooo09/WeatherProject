@@ -74,24 +74,11 @@ void menu()
 
 	case 2:
 		// Advanced search
-		system("cls");
-		cout << "*MAIN MENU*\nAdvanced search\n\n";
-		cout << "With this mode, you can perform a search and select a location from a list of results.\n";
-		cout << "Use it specially if you don't get desired results with the quick query mode.\n\n";
 		advancedSearch();
 		break;
 
 	case 3:
 		// View data
-		system("cls");
-		cout << "*MAIN MENU*\nView data\n\n";
-		cout << "This mode allows checking technical details about the selected location, such as:\n";
-		cout << "  - City ID\n";
-		cout << "  - Coordinates (latitude and longitude)\n";
-		cout << "  - Location names in supported languages\n";
-		cout << "  - Timezone\n";
-		cout << "  - Sunrise and sunset time\n";
-		cout << "  - And more!\n\n";
 		viewData();
 		break;
 

@@ -1,7 +1,7 @@
 #include "lib/globals.hpp"
 #include <string>
 
-std::string fileName = "weatherData.json";
+std::string fileName = "data.json";
 bool curlError = false;
 
 std::string query;
