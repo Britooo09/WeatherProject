@@ -120,3 +120,67 @@ string timezoneConversion(int offset)
 
 	return tz;
 }
+
+void saveQuery(string id, int mode)
+{
+	nlohmann::json j;
+	std::ifstream check("config.json");
+	if (check.is_open())
+	{
+		j = nlohmann::json::parse(check);
+		check.close();
+	}
+
+	std::ofstream save("config.json");
+	if (save.is_open())
+	{
+		j["lastQuery"]["id"] = id;
+		j["lastQuery"]["mode"] = mode;
+		save << j;
+		save.close();
+	}
+}
+
+void loadQuery()
+{
+	nlohmann::json j;
+	int mode;
+	std::ifstream load("config.json");
+	if (load.is_open())
+	{
+		j = nlohmann::json::parse(load);
+		query = j["lastQuery"]["id"];
+		mode = j["lastQuery"]["mode"];
+
+		bool tempIsWeather = isWeather;
+		(mode == 0 || mode == 2) ? isWeather = true : isWeather = false;
+		curlStart(urlConstruction(1));
+		if (!curlOK)
+		{
+			menu();
+			return;
+		}
+
+		isWeather = tempIsWeather;
+		load.close();
+
+		// Display results based on the mode of the last query
+		// 0 = Weather, 1 = Forecast, 2 = Additional data
+		// Can be refactored later into an if-else or switch-case structure if necessary.
+		(mode == 0) ? displayResults(true) : ((mode == 1) ? displayResults(false) : displayViewData());
+	}
+
+	else
+	{
+		system("cls");
+		std::cout << "Couldn't find a previous consult!\n";
+		std::cout << "This could be for three main reasons:\n";
+		std::cout << "  - This is the first time you run the program. Go do some queries!\n";
+		std::cout << "  - The configuration file doesn't exist or couldn't be opened.\n";
+		std::cout << "  - The last query was not performed correctly.\n\n";
+		std::cout << "Returning to main menu...\n\n";
+
+		system("pause");
+		menu();
+	}
+}

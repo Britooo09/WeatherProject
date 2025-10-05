@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 
-// Functions definition
 size_t curlCallback(void* contents, size_t unitsize, size_t qty, void* userp)
 {
 	size_t realsize = unitsize * qty;					// realsize stores full processed data size
@@ -41,12 +40,16 @@ void curlStart(std::string url)
 				fileWrite << api_response;
 				fileWrite.close();
 			}
+			curlOK = true;
 		}
+
 		else
 		{
-			std::cerr << "cURL failed.\n";
-			std::cerr << "Error: " << curl_easy_strerror(res) << "\n\n";
-			curlError = true;
+			std::cerr << "\ncURL failed.\n";
+			std::cerr << "Error: " << curl_easy_strerror(res) << "\n";
+			std::cerr << "Returning to main menu...\n\n";
+			curlOK = false;
+			system("pause");
 		}
 	}
 	curl_easy_cleanup(curl);

@@ -2,9 +2,10 @@
 #include <string>
 
 std::string fileName = "data.json";
-bool curlError = false;
+bool curlOK = true;
 
 std::string query;
+bool queryOK = true;
 int lang;
 bool isMetric;
 bool isWeather;

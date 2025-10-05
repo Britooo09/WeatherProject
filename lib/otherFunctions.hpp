@@ -6,3 +6,6 @@ void initialConfigRead();
 
 std::string unixConversion(std::uint32_t timestamp, bool isFullDate);
 std::string timezoneConversion(int offset);
+
+void saveQuery(std::string id, int mode);
+void loadQuery();
