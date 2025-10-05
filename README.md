@@ -6,16 +6,16 @@
 [![Discourse Community](https://img.shields.io/badge/discourse-community-brightgreen.svg?style=flat)](https://community.aseprite.org/)
 [![Discord Server](https://discordapp.com/api/guilds/324979738533822464/embed.png)](https://discord.gg/Yb2CeX8) -->
 
-Practice project. Console application that allows to check weather information using the OpenWeatherMaps API.
+Practice project. Console application that allows to check weather information using the OpenWeatherMap API.
 
 ## Description
 
-**Weather Project** is the second complete project I am about to undertake, and the first intended solely for personal and practice purposes. The idea is to create a console application that, based on the options chosen by the user, displays a series of weather information (current, forecasts, etc.), obtained through a connection to the [OpenWeatherMaps API](https://openweathermap.org/api). The third-party libraries [cURL](https://curl.se/libcurl/) and [nlohmann/json](https://github.com/nlohmann/json) are used.
+**Weather Project** is the second complete project I am about to undertake, and the first intended solely for personal and practice purposes. The idea is to create a console application that, based on the options chosen by the user, displays a series of weather information (current, forecasts, etc.), obtained through a connection to the [OpenWeatherMap API](https://openweathermap.org/api). The third-party libraries [cURL](https://curl.se/libcurl/) and [nlohmann/json](https://github.com/nlohmann/json) are used.
 
 ---
 
-Proyecto de práctica. Aplicación de consola que permite consultar información sobre el clima utilizando la API de OpenWeatherMaps.
+Proyecto de práctica. Aplicación de consola que permite consultar información sobre el clima utilizando la API de OpenWeatherMap.
 
 ## Descripción
 
-**Weather Project** es el segundo proyecto completo que me dispongo a hacer, y el primero destinado únicamente para fines personales y de práctica. La idea consiste en una aplicación de consola que, a partir de las opciones elegidas por el usuario, muestra una serie de información sobre el clima (actual, pronósticos, etc.), obtenida gracias a la conexión con la [API de OpenWeatherMaps](https://openweathermap.org/api). Se utilizan las librerías de terceros [cURL](https://curl.se/libcurl/) y [nlohmann/json](https://github.com/nlohmann/json).
+**Weather Project** es el segundo proyecto completo que me dispongo a hacer, y el primero destinado únicamente para fines personales y de práctica. La idea consiste en una aplicación de consola que, a partir de las opciones elegidas por el usuario, muestra una serie de información sobre el clima (actual, pronósticos, etc.), obtenida gracias a la conexión con la [API de OpenWeatherMap](https://openweathermap.org/api). Se utilizan las librerías de terceros [cURL](https://curl.se/libcurl/) y [nlohmann/json](https://github.com/nlohmann/json).
