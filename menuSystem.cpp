@@ -1,7 +1,6 @@
 // Custom headers
 #include "lib/menuSystem.hpp"
 #include "lib/apiFunctions.hpp"
-#include "lib/initialConfigRead.hpp"
 #include "lib/globals.hpp"
 
 // 3rd party headers
@@ -47,7 +46,7 @@ void intro()
 
 	case 0:
 		// Close
-		break;
+		return;
 
 	default:
 		cout << "The option selected is invalid. Please, try again.\n\n";
@@ -84,9 +83,6 @@ void menu()
 
 	case 4:
 		// Repeat last query
-		system("cls");
-		cout << "*MAIN MENU*\nRepeat last query\n\n";
-		cout << "This option shows the results of the last successful query made.\n\n";
 		lastQuery();
 		break;
 
@@ -144,10 +140,6 @@ void settings()
 				currentText = "English";
 				break;
 
-			case 1:
-				currentText = "Spanish";
-				break;
-
 			default:
 				currentText = "Invalid";
 				break;
@@ -161,14 +153,15 @@ void settings()
 
 		cout << "*SETTINGS*\nLanguage\n\n";
 		cout << "This option allows to set the language of the program. This also affects the results.\n";
+		cout << "For now, only English is available. More languages coming soon!\n";
 		cout << "Current setting: " << currentText << ".\n";
-		cout << "  1- English\n  2- Spanish\n  0- Back\n\n";
+		cout << "  1- English\n  0- Back\n\n";
 
 		// In order to add a new language, the following do and if blocks conditions must be adjusted accordingly
 		do
 		{
 			cin >> opt;
-			if (opt < 0 || opt > 2)
+			if (opt < 0 || opt > 1)
 			{
 				// If the option selected is not on the menu
 				cerr << "\nThe option selected is invalid. Please, try again.\n\n";
@@ -203,7 +196,7 @@ void settings()
 				}
 			}
 
-		} while (opt < 0 || opt > 2);
+		} while (opt < 0 || opt > 1);
 		break;
 	}
 
