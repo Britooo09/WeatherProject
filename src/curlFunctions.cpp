@@ -1,5 +1,5 @@
-#include "lib/curlFunctions.hpp"
-#include "lib/globals.hpp"
+#include "../lib/curlFunctions.hpp"
+#include "../lib/globals.hpp"
 #include <curl/curl.h>
 #include <iostream>
 #include <fstream>

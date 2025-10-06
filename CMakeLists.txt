@@ -6,12 +6,12 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(WEATHER_SOURCES
-    main.cpp
-    curlFunctions.cpp
-    otherFunctions.cpp
-    menuSystem.cpp
-    globals.cpp
-    apiFunctions.cpp)
+    "src/main.cpp"
+    "src/curlFunctions.cpp"
+    "src/otherFunctions.cpp"
+    "src/menuSystem.cpp"
+    "src/globals.cpp"
+    "src/apiFunctions.cpp")
 
 # =================================================================
 # PROJECT COMPILING

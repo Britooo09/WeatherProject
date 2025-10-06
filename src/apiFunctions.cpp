@@ -1,13 +1,13 @@
 // Custom headers
-#include "lib/apiFunctions.hpp"
-#include "lib/api_keys.hpp"
-#include "lib/curlFunctions.hpp"
-#include "lib/globals.hpp"
-#include "lib/menuSystem.hpp"
-#include "lib/otherFunctions.hpp"
+#include "../lib/apiFunctions.hpp"
+#include "../lib/api_keys.hpp"
+#include "../lib/curlFunctions.hpp"
+#include "../lib/globals.hpp"
+#include "../lib/menuSystem.hpp"
+#include "../lib/otherFunctions.hpp"
 
 // 3rd party headers
-#include "lib/json.hpp"
+#include "../lib/json.hpp"
 
 // Standard headers
 #include <chrono>

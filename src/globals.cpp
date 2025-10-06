@@ -1,4 +1,4 @@
-#include "lib/globals.hpp"
+#include "../lib/globals.hpp"
 #include <string>
 
 std::string fileName = "data.json";
