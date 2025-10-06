@@ -1,8 +1,8 @@
 # ☁️ Weather Project
 
-**Weather Project** is my second complete project, and the first one intended solely for personal and practice purposes. It is a console application written in C++ (C++20 standard), whose purpose is to query, process, and display current weather information for any city in the world, based on the options chosen by the user.
+**Weather Project** is my second complete project, and the first one intended solely for personal and practice purposes. It is a console application written in C++, aimed at consulting, processing, and displaying up-to-date weather information for any city in the world, based on the options chosen by the user.
 
-All data obtained by the program is obtained through a connection to the [OpenWeatherMap API](https://openweathermap.org/api). This project uses [libraries and other technologies developed by third parties](#credits).
+All data is obtained through a connection to the [OpenWeatherMap API](https://openweathermap.org/api). This project uses [libraries and other technologies developed by third parties](#credits).
 
 ## Main Features
 
