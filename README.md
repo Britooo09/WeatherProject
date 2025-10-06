@@ -71,11 +71,7 @@ git clone https://github.com/Britooo09/WeatherProject.git
 cd WeatherProject
 ```
 2. Move the `api_keys.hpp` file you created earlier to the `lib/` folder of the cloned repository.
-3. Install dependencies with vcpkg:
-```bash
-vcpkg install curl nlohmann-json
-```
-4. Configure and Compile with CMake:
+3. Configure and Compile with CMake. The first command will install dependencies with vcpkg automatically:
 ```bash
 cmake -B build -S . -G “Ninja” -DCMAKE_TOOLCHAIN_FILE=[PATH_TO_VCPKG]/scripts/buildsystems/vcpkg.cmake
 cmake --build build
